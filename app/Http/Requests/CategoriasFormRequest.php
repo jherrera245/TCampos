@@ -25,6 +25,7 @@ class CategoriasFormRequest extends FormRequest
     {
         return [
             'nombre'=>'required|string|max:50',
+            'descripcion' =>'required|string|max:200',
         ];
     }
 }

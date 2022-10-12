@@ -27,6 +27,16 @@ Nueva Categoría
                         </div>
                     </div>
 
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="nombre">Descripción Categoría</label>
+                                <textarea type="text" class="form-control" name="descripcion" id="descripcion" 
+                                placeholder="Descripción de la categoría" row="4"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-edit"></i>&nbsp;Guardar
                     </button>

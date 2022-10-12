@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableCategorias extends Migration
+class CreateTableIngresos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateTableCategorias extends Migration
      */
     public function up()
     {
-        Schema::create('categorias', function (Blueprint $table) {
+        Schema::create('ingresos', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre', 50);
-            $table->string('descripcion', 200);
+            $table->foreignId('id_proveedor');
+            $table->foreign('id_proveedor')->references('id')->on('proveedores');
+            $table->date('fecha');
+            $table->float('impuesto', 10, 2);
             $table->boolean('status')->default(true);
             $table->timestamps();
         });
@@ -29,6 +31,6 @@ class CreateTableCategorias extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('ingresos');
     }
 }

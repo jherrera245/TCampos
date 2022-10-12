@@ -22,6 +22,7 @@ Categorias
                         <tr>
                             <th>ID</th>
                             <th>Categoria</th>
+                            <th>Descripción</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -30,6 +31,7 @@ Categorias
                         <tr>
                             <td>{{$categoria->id}}</td>
                             <td>{{$categoria->nombre}}</td>
+                            <td>{{$categoria->descripcion}}</td>
                             <td>
                                 <a class="btn btn-primary" href="/categorias/{{$categoria->id}}/edit">
                                     <i class="fa fa-pen"></i>

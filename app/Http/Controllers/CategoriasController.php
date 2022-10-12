@@ -15,7 +15,7 @@ class CategoriasController extends Controller
         if ($request) {
             $query = trim($request->get('search'));
             $categorias = DB::table('categorias as c')
-            ->select('c.id', 'c.nombre')
+            ->select('c.id', 'c.nombre', 'c.descripcion')
             ->where('c.nombre','LIKE', '%'.$query.'%')
             ->where('c.status','=', '1')
             ->orderBy('c.id','desc')
@@ -36,6 +36,7 @@ class CategoriasController extends Controller
     {
         $categoria = new Categorias();
         $categoria->nombre = $request->get('nombre');
+        $categoria->descripcion = $request->get('descripcion');
         $categoria->save();
         return redirect('/categorias');
     }
@@ -52,6 +53,7 @@ class CategoriasController extends Controller
     {
         $categoria = Categorias::find($id);
         $categoria->nombre = $request->get('nombre');
+        $categoria->descripcion = $request->get('descripcion');
         $categoria->update();
         return redirect('/categorias');
     }
