@@ -19,9 +19,11 @@ class CreateTableProductos extends Migration
             $table->string('codigo', 75);
             $table->smallInteger('stock');
             $table->string('descripcion', 200);
-            $table->string('imagen', 200);
+            $table->string('imagen', 200)->nullable();
             $table->foreignId('id_categoria');
             $table->foreign('id_categoria')->references('id')->on('categorias');
+            $table->foreignId('id_marca');
+            $table->foreign('id_marca')->references('id')->on('marcas');
             $table->boolean('status')->default(true);
             $table->timestamps();
         });

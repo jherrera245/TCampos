@@ -1,28 +1,29 @@
 @extends('layouts.admin')
 @section('header')
-Nueva Categoría
+Actualizar Marca
 @endsection
 
 @section('contenido')
 <div class="row">
     <div class="col-12">
-        <div class="card card-primary card-outline">
+        <div class="card card-success card-outline">
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-edit"></i>
-                    Registro de Categorias
+                    Editar Marca: {{$marca->nombre}}
                 </h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="/categorias" method="post">
+                <form action="/marcas/{{$marca->id}}" method="post">
                     @csrf
+                    @method('PUT')
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group mb-3">
-                                <label for="nombre">Nombre Categoría</label>
+                                <label for="nombre">Nombre Marca</label>
                                 <input type="text" class="form-control" name="nombre" id="nombre" 
-                                placeholder="Nombre de la categoría" maxLength="50">
+                                placeholder="Nombre de la marca" value="{{$marca->nombre}}" maxLength="50">
                             </div>
                         </div>
                     </div>
@@ -30,9 +31,9 @@ Nueva Categoría
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group mb-3">
-                                <label for="nombre">Descripción Categoría</label>
+                                <label for="nombre">Descripción Marca</label>
                                 <textarea type="text" class="form-control" name="descripcion" id="descripcion" 
-                                placeholder="Descripción de la categoría" rows="4"></textarea>
+                                placeholder="Descripción de la marca" rows="4">{{$marca->descripcion}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -40,7 +41,7 @@ Nueva Categoría
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-edit"></i>&nbsp;Guardar
                     </button>
-                    <a href="/categorias" class="btn btn-secondary">
+                    <a href="/marcas" class="btn btn-secondary">
                         <i class="fas fa-angle-left"></i>&nbsp;Cancelar
                     </a>
                 </form>

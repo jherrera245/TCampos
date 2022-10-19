@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
+use App\Http\Controllers\MarcasController;
+use App\Http\Controllers\ProductosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,5 @@ Route::get('/', function () {
 
 //agregando rutas de controladores
 Route::resource('/categorias', CategoriasController::class);
+Route::resource('/marcas', MarcasController::class);
+Route::resource('/productos', ProductosController::class);

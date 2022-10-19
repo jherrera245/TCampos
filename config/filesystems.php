@@ -30,6 +30,13 @@ return [
 
     'disks' => [
 
+        'productos'=>[
+            'driver' => 'local',
+            'root' => storage_path('productos'),
+            'url' => env('APP_URL').'/img-producto',
+            'visibility'=> 'public',
+        ],
+
         'local' => [
             'driver' => 'local',
             'root' => storage_path('app'),
@@ -68,6 +75,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('img-producto') => storage_path('productos'),
     ],
 
 ];

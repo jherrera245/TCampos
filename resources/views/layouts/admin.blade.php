@@ -11,6 +11,9 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}" />
+    <!-- Select2-->
+    <link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}" />
+    <link rel="stylesheet" href="{{asset('plugins/select2/css/select2-bootstrap4.min.css')}}" />
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}" />
 </head>
@@ -114,7 +117,7 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
+                                    <a href="/productos" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Productos</p>
                                     </a>
@@ -123,6 +126,13 @@
                                     <a href="/categorias" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Categorias</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="/marcas" class="nav-link">
+                                        <i class="far fa-circle nav-icon"></i>
+                                        <p>Marcas</p>
                                     </a>
                                 </li>
                             </ul>
@@ -259,12 +269,20 @@
     <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
+    <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
     <script>
         const actualYear = document.getElementById('actualYear');
         let date = new Date();
         
         actualYear.innerHTML = date.getFullYear();
+
+        $(document).ready(function() {
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+            theme: 'bootstrap4'
+            })
+        })
     </script>
 </body>
 
