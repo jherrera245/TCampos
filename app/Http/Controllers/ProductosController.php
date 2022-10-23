@@ -58,7 +58,7 @@ class ProductosController extends Controller
         if ($request->hasFile('imagen')) {
             $url = $request->file('imagen');
             $nombre = str_replace(' ', '-', trim($request->get('nombre')));
-            $nombre = hash('sha256', $nombre.random(0, 1000)); //ciframos el nombre
+            $nombre = hash('sha256', $nombre); //ciframos el nombre
             $file = $nombre.".".$url->guessExtension();
             //guardamos el archivo en el servidor
             Storage::disk('productos')->put($file, File::get($url));

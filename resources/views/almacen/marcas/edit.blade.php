@@ -31,7 +31,7 @@ Actualizar Marca
                     <div class="row">
                         <div class="col-lg-6 col-sm-12">
                             <div class="form-group mb-3">
-                                <label for="nombre">Descripción Marca</label>
+                                <label for="descripcion">Descripción Marca</label>
                                 <textarea type="text" class="form-control" name="descripcion" id="descripcion" 
                                 placeholder="Descripción de la marca" rows="4">{{$marca->descripcion}}</textarea>
                             </div>

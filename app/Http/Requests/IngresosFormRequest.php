@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ProveedoresFormRequest extends FormRequest
+class IngresosFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class ProveedoresFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,14 @@ class ProveedoresFormRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'proveedor',
+            'factura',
+            'impuesto',
+            'ingreso',
+            'producto',
+            'cantidad',
+            'precio_compra',
+            'precio_venta'
         ];
     }
 }

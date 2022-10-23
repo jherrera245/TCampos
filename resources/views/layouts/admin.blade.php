@@ -148,13 +148,13 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
+                                    <a href="/ingresos" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ingresos</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index2.html" class="nav-link">
+                                    <a href="/proveedores" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Proveedores</p>
                                     </a>
@@ -172,13 +172,13 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
+                                    <a href="/ventas" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ventas</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="../../index2.html" class="nav-link">
+                                    <a href="/clientes" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Clientes</p>
                                     </a>
@@ -280,7 +280,11 @@
         $(document).ready(function() {
             //Initialize Select2 Elements
             $('.select2bs4').select2({
-            theme: 'bootstrap4'
+                theme: 'bootstrap4',
+                width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+                placeholder: $(this).data('placeholder'),
+                allowClear: Boolean($(this).data('allow-clear')),
+                closeOnSelect: !$(this).attr('multiple'),
             })
         })
     </script>

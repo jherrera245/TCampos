@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoriasController;
 use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\ProductosController;
+use App\Http\Controllers\ProveedoresController;
+use App\Http\Controllers\IngresosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,5 @@ Route::get('/', function () {
 Route::resource('/categorias', CategoriasController::class);
 Route::resource('/marcas', MarcasController::class);
 Route::resource('/productos', ProductosController::class);
+Route::resource('/proveedores', ProveedoresController::class);
+Route::resource('/ingresos', IngresosController::class);

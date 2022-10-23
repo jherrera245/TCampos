@@ -29,7 +29,7 @@ Actualizar Producto
 
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group mb-3">
-                                <label for="nombre">Categoría</label>
+                                <label for="categoria">Categoría</label>
                                 <select class="form-control select2bs4" name="categoria" id="categoria">
                                     @foreach($categorias as $categoria)
                                     @if($producto->id_categoria == $categoria->id)
@@ -84,7 +84,7 @@ Actualizar Producto
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mb-3">
-                                <label for="nombre">Descripción</label>
+                                <label for="descripcion">Descripción</label>
                                 <textarea type="text" class="form-control" name="descripcion" id="descripcion" 
                                 placeholder="Descripción del producto" rows="4">{{$producto->descripcion}}</textarea>
                             </div>

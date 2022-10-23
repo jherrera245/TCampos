@@ -17,6 +17,7 @@ class CreateTableIngresos extends Migration
             $table->id();
             $table->foreignId('id_proveedor');
             $table->foreign('id_proveedor')->references('id')->on('proveedores');
+            $table->string('codigo_factura', 20);
             $table->date('fecha');
             $table->float('impuesto', 10, 2);
             $table->boolean('status')->default(true);

@@ -19,7 +19,7 @@ class CreateTriggerUpdateStockVenta extends Migration
             'CREATE TRIGGER trigger_update_stock_venta AFTER INSERT ON detalle_ventas FOR EACH 
             ROW BEGIN
                 UPDATE productos SET stock = stock - NEW.cantidad
-                WHERE productos.id = NEW.id;
+                WHERE productos.id = NEW.id_producto;
             END
         ');
     }
