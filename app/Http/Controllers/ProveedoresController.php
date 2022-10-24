@@ -75,12 +75,12 @@ class ProveedoresController extends Controller
         return redirect('/proveedores');
     }
  
-     //elimindar datos
-     public function destroy($id)
-     {
+    //elimindar datos
+    public function destroy($id)
+    {
         $proveedor = Proveedores::find($id);
         $proveedor->status = false;
         $proveedor->update();
         return redirect('/proveedores');
-     }
+    }
 }
