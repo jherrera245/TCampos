@@ -107,7 +107,7 @@ class IngresosController extends Controller
         return view('compras.ingresos.show', ["ingreso"=>$ingreso, "detalles"=>$detalles]);
     }
 
-    //elimindar datos
+    //cancelar
     public function destroy($id)
     {
         $ingreso = Ingresos::find($id);
