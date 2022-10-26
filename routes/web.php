@@ -28,3 +28,4 @@ Route::resource('/marcas', MarcasController::class);
 Route::resource('/productos', ProductosController::class);
 Route::resource('/proveedores', ProveedoresController::class);
 Route::resource('/ingresos', IngresosController::class);
+Route::resource('/clientes', ClientesController::class);
