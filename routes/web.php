@@ -19,7 +19,7 @@ use App\Http\Controllers\IngresosController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 //agregando rutas de controladores
@@ -29,3 +29,6 @@ Route::resource('/productos', ProductosController::class);
 Route::resource('/proveedores', ProveedoresController::class);
 Route::resource('/ingresos', IngresosController::class);
 Route::resource('/clientes', ClientesController::class);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

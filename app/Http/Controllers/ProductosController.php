@@ -11,6 +11,16 @@ use DB;
 
 class ProductosController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     //index
     public function index(Request $request)
     {

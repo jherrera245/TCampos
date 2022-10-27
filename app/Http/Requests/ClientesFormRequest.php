@@ -25,7 +25,7 @@ class ClientesFormRequest extends FormRequest
     {
         return [
             'nombres'=>'required|max:100',
-            'apellidos'=>'requireed|max:100',
+            'apellidos'=>'required|max:100',
             'fecha_nacimiento'=>'required|max:100',
             'dui'=>'required|max:10',
             'telefono'=>'max:8',
