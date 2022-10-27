@@ -4,15 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Clientes;
-use App\Http\Request\ClientesFormRequest;
+use App\Http\Requests\ClientesFormRequest;
 use DB;
 
 class ClientesController extends Controller
 {
-    public function __construct()
-    {
-
-    }
+    
 
     public function index(Request $request)
     {
@@ -22,7 +19,7 @@ class ClientesController extends Controller
              ->where('status','=','1')
              ->orderBy('id','desc')
              ->paginate(7);
-             return view('almacen.clientes.index',
+             return view('ventas.clientes.index',
                 [
                 "clientes"=>$clientes,
                 "searchText"=>$query
@@ -35,7 +32,7 @@ class ClientesController extends Controller
 
     public function create()
     {
-        return view("almacen.clientes.create");
+        return view("ventas.clientes.create");
 
     }
 
@@ -44,31 +41,47 @@ class ClientesController extends Controller
         $clientes=new Clientes;
         $clientes->nombres=$request->get('nombres');
         $clientes->apellidos=$request->get('apellidos');
-        $clientes->fecha_nacimiento=$request->get('fecha_nacimiento');
+        $clientes->fecha_nacimiento=$request->get('nacimiento');
         $clientes->dui=$request->get('dui');
         $clientes->direccion=$request->get('direccion');
         $clientes->telefono=$request->get('telefono');
         $clientes->email=$request->get('email');
         $clientes->status='1';
         $clientes->save();
-        return Redirect::to('almacen/clientes');
+        return Redirect::to('ventas/clientes');
         
     }
 
-    public function show(){
+    public function show($id)
+    {
+        return view("ventas.clientes.show",
+            ["clientes"=>Clientes::findOrFail($id)]);
+        
+    }
+
+    public function edit()
+    {
+        return view("ventas.clientes.edit",
+        ["clientes"=>Clientes::findOrFail($id)]);
+
 
     }
 
-    public function edit(){
-
+    public function update(ClientesFormRequest $request,$id)
+    {
+        $clientes=Clientes::findOrFail($id);
+        $clientes->nombres=$request->get('nombres');
+        $clientes->apellidos=$request->get('apellidos');
+        $clientes->update();
 
     }
 
-    public function update(){
-
-    }
-
-    public function destroy(){
+    public function destroy()
+    {
+        $clientes=Clientes::findOrFail($id);
+        $clientes->status='0';
+        $clientes->update();
+        return Redirect::to('ventas/clientes');
 
     }
     

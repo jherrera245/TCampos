@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('header')
-Nuevo Proveedor
+Nuevo Cliente
 @endsection
 
 @section('contenido')
@@ -10,7 +10,7 @@ Nuevo Proveedor
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-edit"></i>
-                    Registro de Producto
+                    Registro de clientes
                 </h3>
             </div>
             <!-- /.card-header -->

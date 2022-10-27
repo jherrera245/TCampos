@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+
 class ClientesFormRequest extends FormRequest
 {
     /**
@@ -24,11 +25,11 @@ class ClientesFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombres'=>'required|max:100',
-            'apellidos'=>'requireed|max:100',
-            'fecha_nacimiento'=>'required|max:100',
-            'dui'=>'required|max:10',
-            'telefono'=>'max:8',
+            'nombres'=>'required|string|max:75',
+            'apellidos'=>'required|string|max:75',
+            'nacimiento'=>'required|date',
+            'dui'=>'required|string|max:10',
+            'telefono'=>'required|string|max:9',
         ];
     }
 }

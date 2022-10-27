@@ -6,6 +6,7 @@ use App\Http\Controllers\MarcasController;
 use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\IngresosController;
+use App\Http\Controllers\ClientesController;
 
 /*
 |--------------------------------------------------------------------------
