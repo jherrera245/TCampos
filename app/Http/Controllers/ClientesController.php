@@ -9,7 +9,15 @@ use DB;
 
 class ClientesController extends Controller
 {
-    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(Request $request)
     {
@@ -19,14 +27,14 @@ class ClientesController extends Controller
              ->where('status','=','1')
              ->orderBy('id','desc')
              ->paginate(7);
-             return view('ventas.clientes.index',
+            
+             return view('ventas.clientes.index', 
                 [
-                "clientes"=>$clientes,
-                "searchText"=>$query
-                ]);
-
+                    "clientes"=>$clientes,
+                    "searchText"=>$query
+                ]
+            );
         }
-
 
     }
 
@@ -48,23 +56,20 @@ class ClientesController extends Controller
         $clientes->email=$request->get('email');
         $clientes->status='1';
         $clientes->save();
-        return Redirect::to('ventas/clientes');
-        
+
+        return redirect('clientes');   
     }
 
     public function show($id)
     {
-        return view("ventas.clientes.show",
-            ["clientes"=>Clientes::findOrFail($id)]);
-        
+        $clientes=Clientes::findOrFail($id);
+        return view("ventas.clientes.edit", ["clientes"=>$clientes]);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        return view("ventas.clientes.edit",
-        ["clientes"=>Clientes::findOrFail($id)]);
-
-
+        $clientes=Clientes::findOrFail($id);
+        return view("ventas.clientes.edit", ["clientes"=>$clientes]);
     }
 
     public function update(ClientesFormRequest $request,$id)
@@ -74,6 +79,7 @@ class ClientesController extends Controller
         $clientes->apellidos=$request->get('apellidos');
         $clientes->update();
 
+        return redirect('clientes');  
     }
 
     public function destroy()
@@ -81,8 +87,8 @@ class ClientesController extends Controller
         $clientes=Clientes::findOrFail($id);
         $clientes->status='0';
         $clientes->update();
-        return Redirect::to('ventas/clientes');
 
+        return redirect('clientes');  
     }
     
 }
