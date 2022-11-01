@@ -10,7 +10,15 @@ use DB;
 
 class ClientesController extends Controller
 {
-    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index(Request $request)
     {
@@ -20,14 +28,14 @@ class ClientesController extends Controller
              ->where('status','=','1')
              ->orderBy('id','desc')
              ->paginate(7);
-             return view('ventas.clientes.index',
+            
+             return view('ventas.clientes.index', 
                 [
-                "clientes"=>$clientes,
-                "searchText"=>$query
-                ]);
-
+                    "clientes"=>$clientes,
+                    "searchText"=>$query
+                ]
+            );
         }
-
 
     }
 
@@ -55,17 +63,14 @@ class ClientesController extends Controller
 
     public function show($id)
     {
-        return view("ventas.clientes.show",
-            ["clientes"=>Clientes::findOrFail($id)]);
-        
+        $clientes=Clientes::findOrFail($id);
+        return view("ventas.clientes.edit", ["clientes"=>$clientes]);
     }
 
     public function edit($id)
     {
-        return view("ventas.clientes.edit",
-        ["clientes"=>Clientes::findOrFail($id)]);
-
-
+        $clientes=Clientes::findOrFail($id);
+        return view("ventas.clientes.edit", ["clientes"=>$clientes]);
     }
 
     public function update(ClientesFormRequest $request,$id)
@@ -81,6 +86,7 @@ class ClientesController extends Controller
         $clientes->update();
         return redirect('/clientes');
 
+        return redirect('clientes');  
     }
 
     public function destroy($id)
@@ -90,6 +96,7 @@ class ClientesController extends Controller
         $clientes->update();
         return redirect('/clientes');
 
+     
     }
     
 }
