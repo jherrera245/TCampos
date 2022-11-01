@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Redirect;
 use App\Models\Clientes;
 use App\Http\Requests\ClientesFormRequest;
 use DB;
@@ -48,7 +49,7 @@ class ClientesController extends Controller
         $clientes->email=$request->get('email');
         $clientes->status='1';
         $clientes->save();
-        return Redirect::to('ventas/clientes');
+        return redirect('/clientes');
         
     }
 
@@ -59,7 +60,7 @@ class ClientesController extends Controller
         
     }
 
-    public function edit()
+    public function edit($id)
     {
         return view("ventas.clientes.edit",
         ["clientes"=>Clientes::findOrFail($id)]);
@@ -72,16 +73,22 @@ class ClientesController extends Controller
         $clientes=Clientes::findOrFail($id);
         $clientes->nombres=$request->get('nombres');
         $clientes->apellidos=$request->get('apellidos');
+        $clientes->fecha_nacimiento=$request->get('nacimiento');
+        $clientes->dui=$request->get('dui');
+        $clientes->direccion=$request->get('direccion');
+        $clientes->telefono=$request->get('telefono');
+        $clientes->email=$request->get('email');
         $clientes->update();
+        return redirect('/clientes');
 
     }
 
-    public function destroy()
+    public function destroy($id)
     {
         $clientes=Clientes::findOrFail($id);
         $clientes->status='0';
         $clientes->update();
-        return Redirect::to('ventas/clientes');
+        return redirect('/clientes');
 
     }
     

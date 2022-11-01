@@ -43,12 +43,12 @@ Clientes
                                     <i class="fa fa-pen"></i>
                                 </a>
 
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#marca-modal-{{$cliente->id}}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cliente-modal-{{$cliente->id}}">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </td>
                         </tr>
-                       
+                        @include('ventas.clientes.modal')
                         @endforeach
                     </tbody>
                 </table>
