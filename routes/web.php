@@ -7,6 +7,7 @@ use App\Http\Controllers\ProductosController;
 use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\IngresosController;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\VentasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,7 @@ Route::resource('/productos', ProductosController::class);
 Route::resource('/proveedores', ProveedoresController::class);
 Route::resource('/ingresos', IngresosController::class);
 Route::resource('/clientes', ClientesController::class);
+Route::resource('/ventas', VentasController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

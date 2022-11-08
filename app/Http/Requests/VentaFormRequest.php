@@ -25,6 +25,7 @@ class VentaFormRequest extends FormRequest
     {
         return [
             'id_cliente'=>'required',
+            'status'=>'required',
             'fecha'=>'required',
             'impuesto'=>'required',
             'total'=>'required',
