@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Redirect;
 use App\Models\Clientes;
 use App\Http\Requests\ClientesFormRequest;
 use DB;
