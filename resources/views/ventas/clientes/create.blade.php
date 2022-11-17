@@ -53,7 +53,7 @@ Nuevo Cliente
                             <div class="form-group mb-3">
                                 <label for="telefono">Telefono</label>
                                 <input type="text" class="form-control" name="telefono" id="telefono"
-                                placeholder="Telefono del proveedor" pattern="[0-9]{4}-[0-9]{4}" maxLength="9">
+                                placeholder="Telefono del proveedor" pattern="^[0-9]{4}-[0-9]{4}$" maxLength="9">
                             </div>
                         </div>
 
