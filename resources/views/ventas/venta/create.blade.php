@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('header')
-Nuevo Ingreso
+Nueva Venta
 @endsection
 
 @section('contenido')
@@ -10,20 +10,20 @@ Nuevo Ingreso
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-edit"></i>
-                    Registro de Ingresos
+                    Registro de Ventas 
                 </h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="/ingresos" method="post" enctype="multipart/form-data">
+                <form action="/ventas" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group mb-3">
-                                <label for="proveedor">Proveedores</label>
-                                <select class="form-control select2bs4" name="proveedor" id="proveedor">
-                                @foreach($proveedores as $proveedor)
-                                <option value="{{$proveedor->id}}">{{$proveedor->nombres}} {{$proveedor->apellidos}}</option>
+                                <label for="proveedor">Cliente</label>
+                                <select class="form-control select2bs4" name="idcliente" id="idcliente">
+                                @foreach($clientes as $cliente)
+                                <option value="{{$cliente->id}}">{{$cliente->nombres}} {{$cliente->apellidos}}</option>
                                 @endforeach
                                 </select>
                             </div>
@@ -56,9 +56,9 @@ Nuevo Ingreso
                                         <div class="col-lg-4 col-sm-12">
                                             <div class="form-group mb-3">
                                                 <label for="producto">Productos</label>
-                                                <select class="form-control select2bs4" id="producto">
+                                                <select class="form-control select2bs4" onchange="mostrarDatos()"  name="idproducto" id="idproducto" >
                                                 @foreach($productos as $producto)
-                                                <option value="{{$producto->id}}">{{$producto->producto}} - {{$producto->marca}}</option>
+                                                <option value="{{$producto->id}}_{{$producto->stock}}_{{$producto->precio_promedio}}">{{$producto->producto}}</option>
                                                 @endforeach
                                                 </select>
                                             </div>
@@ -71,22 +71,30 @@ Nuevo Ingreso
                                                 placeholder="Ingresa cantidad de producto" min="0" step="1">
                                             </div>
                                         </div>
+                                        <div class="col-lg-2 col-sm-12">
+                                            <div class="form-group mb-3">
+                                                <label for="cantidad">Stock</label>
+                                                <input type="number" disabled class="form-control" id="stock" 
+                                                placeholder="Stock" min="0" step="1">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 col-sm-12">
+                                            <div class="form-group mb-3">
+                                                <label for="precio_venta">Precio Venta</label>
+                                                <input type="number" disabled class="form-control" id="precio_venta" 
+                                                placeholder="Ingresa el precio de venta" min="0" step="0.05">
+                                            </div>
+                                        </div>
 
                                         <div class="col-lg-2 col-sm-12">
                                             <div class="form-group mb-3">
-                                                <label for="precio_compra">Precio Compra</label>
-                                                <input type="number" class="form-control" id="precio_compra" 
+                                                <label for="descuento">Descuento</label>
+                                                <input type="number" class="form-control" id="descuento" 
                                                 placeholder="Ingresa el precio de compra" min="0" step="0.05">
                                             </div>
                                         </div>
 
-                                        <div class="col-lg-2 col-sm-12">
-                                            <div class="form-group mb-3">
-                                                <label for="precio_venta">Precio Venta</label>
-                                                <input type="number" class="form-control" id="precio_venta" 
-                                                placeholder="Ingresa el precio de venta" min="0" step="0.05">
-                                            </div>
-                                        </div>
+                                       
 
                                         <div class="col-lg-2 col-sm-12">
                                             <div class="form-group mb-3">
@@ -107,8 +115,8 @@ Nuevo Ingreso
                                                     <th>Opciones</th>
                                                     <th>Producto</th>
                                                     <th>Cantidad</th>
-                                                    <th>Precio Compra</th>
-                                                    <th>Precio Venta</th>
+                                                    <th>Precio venta</th>
+                                                    <th>Descuento</th>
                                                     <th>SubTotal</th>
                                                 </thead>
 
@@ -161,12 +169,12 @@ Nuevo Ingreso
         </td>
 
         <td>
-            <input type="number" class="form-control detalle-precio-compra" name="precio_compra[]" 
+            <input type="number" class="form-control detalle-precio-venta" name="precio_venta[]" 
             placeholder="Ingresa el precio de compra" min="0" step="0.05">
         </td>
 
         <td>
-            <input type="number" class="form-control detalle-precio-venta" name="precio_venta[]" 
+            <input type="number" class="form-control detalle-descuento" name="descuento[]" 
             placeholder="Ingresa el precio de venta" min="0" step="0.05">
         </td>
 
@@ -181,8 +189,10 @@ Nuevo Ingreso
     </td>
     <td>
         <span class="badge badge-primary">
-            $<span id="subtotal"></span>
+            $<span id="total_venta"></span>
         </span>
+
+        <input type="text" id="total" name="total" >
     </td>
 </template>
 
@@ -207,10 +217,14 @@ Nuevo Ingreso
     const btnGuardar = document.querySelector('#btn-guardar');
     
     //entradas
-    const selectProducto = document.querySelector('#producto');
+    const selectProducto = document.querySelector('#idproducto');
+    
     const inputCantidad = document.querySelector('#cantidad');
+    
     const inputPrecioCompra = document.querySelector('#precio_compra');
     const inputPrecioVenta = document.querySelector('#precio_venta');
+    const inputDescuento = document.querySelector('#descuento');
+    const inputStock = document.querySelector('#stock');
     //contenedores
     const contentCompras = document.querySelector('#detalle-compra');
     const contentSubtotal = document.querySelector('#detalle-subtotal');
@@ -221,9 +235,20 @@ Nuevo Ingreso
     let listaCompras = [];
 
     //eventos
+       
     btnAgregar.addEventListener('click', (e) => {
         agregarCompra();
     })
+
+    
+    function mostrarDatos(){
+        //console.log("Hola mundo");
+
+        datosProductos=document.getElementById('idproducto').value.split('_');
+        $('#precio_venta').val(datosProductos[2]);
+        $('#stock').val(datosProductos[1]);
+    }
+            
 
     //evento remover compra
     const agregarEventoRemoverCompra = () => {
@@ -240,26 +265,34 @@ Nuevo Ingreso
 
     //agragar compra a objeto
     const agregarCompra = () =>{
-        let getIdProducto = parseInt(selectProducto.value);
+        datosProductos=document.getElementById('idproducto').value.split('_');
+        let getIdProducto = datosProductos[0];
         let getNombreProducto = selectProducto.options[selectProducto.selectedIndex].text;
         let getCantidad = parseInt(inputCantidad.value);
-        let getPrecioCompra = parseFloat(inputPrecioCompra.value);
+        let getDescuento = parseFloat(inputDescuento.value);
         let getPrecioVenta =  parseFloat(inputPrecioVenta.value);
+        let getStock = parseInt(inputStock.value);
 
-        if (!isNaN(getCantidad) && !isNaN(getPrecioVenta) && !isNaN(getPrecioCompra)) {
-            rows++;
+        if (!isNaN(getCantidad) && !isNaN(getPrecioVenta) && !isNaN(getDescuento)) {
+            if(getStock>=getCantidad){
+                rows++;
             const compra = {
                 id: rows,
                 idProducto: getIdProducto,
                 nombreProducto: getNombreProducto,
                 cantidad: getCantidad,
-                precioCompra: getPrecioCompra,
+                descuento: getDescuento,
                 precioVenta: getPrecioVenta
             };
 
             listaCompras.push(compra);
             clearInput();
             mostrarListaCompra();
+
+            }else{
+                alert("La cantidad a vender supera el stock")
+            }
+            
         }else {
             alert("Completa las entradas")
         }
@@ -277,8 +310,8 @@ Nuevo Ingreso
             clone.querySelector(".detalle-producto-id").value = item.idProducto;
             clone.querySelector(".detalle-producto-nombre").value = item.nombreProducto;
             clone.querySelector(".detalle-cantidad").value = item.cantidad;
-            clone.querySelector(".detalle-precio-compra").value = item.precioCompra;
             clone.querySelector(".detalle-precio-venta").value = item.precioVenta;
+            clone.querySelector(".detalle-descuento").value = item.descuento;
             fragment.appendChild(clone);
         })
 
@@ -295,12 +328,21 @@ Nuevo Ingreso
             let subtotal = 0;
             //contamos las tareas pendientes
             listaCompras.forEach    (item => {
-                subtotal += (item.precioCompra * item.cantidad);
+                subtotal += (item.precioVenta * item.cantidad-item.descuento);
             });
+            $("#total").val(subtotal);
+            console.log(subtotal);
+            
+            
+            
+            
+
 
             const clone = templeteSubtotal.content.cloneNode(true);
 
-            clone.querySelector("#subtotal").textContent = subtotal.toFixed(2);
+            clone.querySelector("#total_venta").textContent = subtotal.toFixed(2);
+           
+           
             fragment.appendChild(clone);
             contentSubtotal.appendChild(fragment);
         }
@@ -315,7 +357,7 @@ Nuevo Ingreso
     const clearInput = () => {
         inputCantidad.value = '';
         inputPrecioVenta.value = '';
-        inputPrecioCompra.value = '';
+        inputDescuento.value = '';
     }
 
     //habilitar o deshabilitar boton guardar

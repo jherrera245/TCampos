@@ -1,7 +1,8 @@
 @extends('layouts.admin')
 @section('header')
 Ventas
-<a href="/ingresos/create" class="btn btn-success">Nuevo</a>
+<a href="/ventas/create" class="btn btn-success">Nuevo</a>
+
 @endsection
 
 @section('contenido')
@@ -12,7 +13,7 @@ Ventas
                 <h3 class="card-title">Listado de ventas</h3>
 
                 <div class="card-tools">
-                    @include('ventas.ventas.search') 
+                    @include('ventas.venta.search') 
                 </div>
             </div>
             <!-- /.card-header -->
