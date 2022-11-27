@@ -8,6 +8,7 @@ use App\Http\Controllers\ProveedoresController;
 use App\Http\Controllers\IngresosController;
 use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\VentasController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,4 +35,14 @@ Route::resource('/clientes', ClientesController::class);
 Route::resource('/ventas', VentasController::class);
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//rutas para graficas
+Route::get('/datos-grafica/ventas-clientes', function(){
+    return HomeController::dataVentaPorCliente();
+});
+
+//rutas para graficas
+Route::get('/datos-grafica/productos-categorias', function(){
+    return HomeController::dataProductoPorCategoria();
+});
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
