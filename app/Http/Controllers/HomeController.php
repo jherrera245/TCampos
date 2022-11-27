@@ -66,11 +66,11 @@ class HomeController extends Controller
         $select = DB::table('productos AS pro')
         ->join('categorias AS cat', 'cat.id', '=', 'pro.id_categoria')
         ->select(
-            'pro.nombre',
+            'cat.nombre',
             DB::raw("COUNT(pro.id_categoria) as total")
         )
         ->where('pro.status','=', '1')
-        ->groupBy('pro.nombre')
+        ->groupBy('cat.nombre')
         ->get();
 
         return json_encode($select);
