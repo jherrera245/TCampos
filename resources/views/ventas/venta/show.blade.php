@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('header')
-Detalle Ingresos
+Detalle ventas
 @endsection
 
 @section('contenido')
@@ -11,8 +11,8 @@ Detalle Ingresos
             <div class="row">
                 <div class="col-12">
                     <h4>
-                    <i class="fas fa-user"></i> Proveedor: {{$ingreso->nombres}} {{$ingreso->apellidos}}
-                    <small class="float-right">Fecha: {{$ingreso->fecha}}</small>
+                    <i class="fas fa-user"></i> Proveedor: {{$venta->nombres}} {{$venta->apellidos}}
+                    <small class="float-right">Fecha: {{$venta->fecha}}</small>
                     </h4>
                 </div>
                 <!-- /.col -->
@@ -44,7 +44,7 @@ Detalle Ingresos
                                 <th colspan="3">Total</th>
                                 <td>
                                     <span class="badge badge-primary">
-                                        ${{$ingreso->total}}
+                                        ${{$venta->total}}
                                     </span>
                                 </td>
                             </tr>
@@ -60,7 +60,7 @@ Detalle Ingresos
                 <div class="col-12">
                     <a href="#" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
                     
-                    <a href="/ingresos" class="btn btn-secondary float-right" style="margin-right: 5px;">
+                    <a href="/ventas" class="btn btn-secondary float-right" style="margin-right: 5px;">
                         <i class="fas fa-angle-left"></i> Regresar
                     </a>
 

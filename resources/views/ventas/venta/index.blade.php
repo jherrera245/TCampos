@@ -47,11 +47,11 @@ Ventas
                                 @endif
                             </td>
                             <td>
-                                <a class="btn btn-info" href="/ingresos/{{$ingreso->id}}">
+                                <a class="btn btn-info" href="/ventas/{{$venta->id}}">
                                     <i class="fa fa-eye"></i>
                                 </a>
 
-                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#ingreso-modal-{{$ingreso->id}}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#venta-modal-{{$venta->id}}">
                                     <i class="fas fa-window-close"></i>
                                 </button>
                             </td>

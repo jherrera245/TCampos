@@ -159,7 +159,7 @@ Nueva Venta
             </button>
         </td>
         <td class="col-3">
-            <input type="hidden" class="form-control detalle-producto-id" name="producto[]">
+            <input type="hidden" class="form-control detalle-producto-id" name="idproducto[]">
             <input type="text" class="form-control detalle-producto-nombre" disabled>
         </td>
 
@@ -192,7 +192,7 @@ Nueva Venta
             $<span id="total_venta"></span>
         </span>
 
-        <input type="text" id="total" name="total" >
+        <input class="form-control" type="hidden" id="total" name="total_venta" >
     </td>
 </template>
 
@@ -332,15 +332,12 @@ Nueva Venta
             });
             $("#total").val(subtotal);
             console.log(subtotal);
-            
-            
-            
-            
-
 
             const clone = templeteSubtotal.content.cloneNode(true);
 
             clone.querySelector("#total_venta").textContent = subtotal.toFixed(2);
+
+            clone.querySelector("#total").value = subtotal.toFixed(2);
            
            
             fragment.appendChild(clone);

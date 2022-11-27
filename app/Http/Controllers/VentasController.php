@@ -70,7 +70,7 @@ class VentasController extends Controller
             $venta->id_cliente=$request->get('idcliente');
             $venta->fecha=$mytime->toDateTimeString();
             $venta->impuesto='13';
-            $venta->status='A';
+            //$venta->status='A';
             $venta->total=$request->get('total_venta');
             $venta->save();
 
@@ -82,7 +82,7 @@ class VentasController extends Controller
             while ($count < count($id_producto)) {
                 $detalle = new DetalleVenta();
                 $detalle->id_venta = $venta->id;
-                $detalle->id_producto = $productos[$count];
+                $detalle->id_producto = $id_producto[$count];
                 $detalle->cantidad = $cantidad[$count];
                 $detalle->descuento = $descuento[$count];
                 $detalle->precio_venta = $precio_venta[$count];
@@ -106,7 +106,7 @@ class VentasController extends Controller
         ->select('v.id', 'v.fecha', 'cl.nombres', 'cl.apellidos', 'v.impuesto', 'v.status',
         'v.total')
         ->where('v.id','=', $id)
-        ->groupBy('i.id','p.nombres', 'p.apellidos', 'i.impuesto', 'i.status')
+        ->groupBy('v.id','cl.nombres', 'cl.apellidos', 'v.impuesto', 'v.status')
         ->first();
 
         $detalles = DB::table('detalle_ventas as d')
@@ -122,7 +122,7 @@ class VentasController extends Controller
     public function destroy($id)
     {
         $venta = Venta::find($id);
-        $venta->status = 'C';
+        $venta->status = 0;
         $venta->update();
         return redirect('/ventas');
     }
