@@ -29,13 +29,6 @@ Nueva Venta
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-sm-12">
-                            <div class="form-group mb-3">
-                                <label for="codigo_factura">Código Factura</label>
-                                <input type="text" class="form-control" name="factura" id="factura" 
-                                placeholder="Ingresa el código de la factura" maxLength="75" required>
-                            </div>
-                        </div>
                     </div>
 
                     <!-- Card regitro de ingresos -->
@@ -58,24 +51,27 @@ Nueva Venta
                                                 <label for="producto">Productos</label>
                                                 <select class="form-control select2bs4" onchange="mostrarDatos()"  name="idproducto" id="idproducto" >
                                                 @foreach($productos as $producto)
+                                                
                                                 <option value="{{$producto->id}}_{{$producto->stock}}_{{$producto->precio_promedio}}">{{$producto->producto}}</option>
                                                 @endforeach
                                                 </select>
                                             </div>
                                         </div>
+                                        
 
                                         <div class="col-lg-2 col-sm-12">
                                             <div class="form-group mb-3">
                                                 <label for="cantidad">Cantidad</label>
-                                                <input type="number" class="form-control" id="cantidad" 
-                                                placeholder="Ingresa cantidad de producto" min="0" step="1">
+                                                <input type="number" name="cantidad" class="form-control" id="cantidad"
+                                                placeholder="Ingresa cantidad de producto" min="0" step="1" >
                                             </div>
                                         </div>
+                                        
                                         <div class="col-lg-2 col-sm-12">
                                             <div class="form-group mb-3">
                                                 <label for="cantidad">Stock</label>
-                                                <input type="number" disabled class="form-control" id="stock" 
-                                                placeholder="Stock" min="0" step="1">
+                                                <input type="number" name="stock" disabled class="form-control" id="stock" 
+                                                placeholder="Stock" min="0" step="1" >
                                             </div>
                                         </div>
                                         <div class="col-lg-2 col-sm-12">
@@ -89,7 +85,7 @@ Nueva Venta
                                         <div class="col-lg-2 col-sm-12">
                                             <div class="form-group mb-3">
                                                 <label for="descuento">Descuento</label>
-                                                <input type="number" class="form-control" id="descuento" 
+                                                <input type="number" class="form-control" name="descuento" id="descuento" 
                                                 placeholder="Ingresa el precio de compra" min="0" step="0.05">
                                             </div>
                                         </div>
@@ -237,6 +233,7 @@ Nueva Venta
     //eventos
        
     btnAgregar.addEventListener('click', (e) => {
+        
         agregarCompra();
     })
 
@@ -247,6 +244,7 @@ Nueva Venta
         datosProductos=document.getElementById('idproducto').value.split('_');
         $('#precio_venta').val(datosProductos[2]);
         $('#stock').val(datosProductos[1]);
+        
     }
             
 
@@ -262,7 +260,19 @@ Nueva Venta
             })
         });
     }
-
+    function restarStock() {
+        var total=0;
+        var ingreso1 = document.getElementById("cantidad");
+        var ingreso2 = document.getElementById("stock");
+        //try{
+            total=parseInt(ingreso2.value || 0)-parseInt(ingreso1.value || 0);
+            console.log(total);
+            document.getElementById("stock").value = total;
+       /* }
+        catch(e) {
+            console.log(e);
+        }*/
+    }
     //agragar compra a objeto
     const agregarCompra = () =>{
         datosProductos=document.getElementById('idproducto').value.split('_');
@@ -272,6 +282,12 @@ Nueva Venta
         let getDescuento = parseFloat(inputDescuento.value);
         let getPrecioVenta =  parseFloat(inputPrecioVenta.value);
         let getStock = parseInt(inputStock.value);
+        var total=0;
+        
+        /*total=getCantidad-getStock;
+        console.log(total);
+        document.getElementById("stock").value = total;*/
+
 
         if (!isNaN(getCantidad) && !isNaN(getPrecioVenta) && !isNaN(getDescuento)) {
             if(getStock>=getCantidad){
@@ -286,6 +302,7 @@ Nueva Venta
             };
 
             listaCompras.push(compra);
+            restarStock();
             clearInput();
             mostrarListaCompra();
 
@@ -355,6 +372,7 @@ Nueva Venta
         inputCantidad.value = '';
         inputPrecioVenta.value = '';
         inputDescuento.value = '';
+       
     }
 
     //habilitar o deshabilitar boton guardar

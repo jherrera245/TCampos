@@ -27,7 +27,7 @@ Detalle ventas
                                 <th>Cantidad</th>
                                 <th>Producto</th>
                                 <th>Precio de Venta</th>
-                                <th>Precio de Comprar</th>
+                                
                             </tr>
                         </thead>
 
@@ -37,7 +37,7 @@ Detalle ventas
                                 <td>{{$detalle->cantidad}}</td>
                                 <td>{{$detalle->producto}}</td>
                                 <td>${{$detalle->precio_venta}}</td>
-                                <td>${{$detalle->precio_compra}}</td>
+                            
                             </tr>
                             @endforeach
                             <tr>
