@@ -58,8 +58,6 @@ Detalle ventas
             <!-- this row will not appear when printing -->
             <div class="row no-print">
                 <div class="col-12">
-                    <a href="#" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                    
                     <a href="/ventas" class="btn btn-secondary float-right" style="margin-right: 5px;">
                         <i class="fas fa-angle-left"></i> Regresar
                     </a>
