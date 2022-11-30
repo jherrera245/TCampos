@@ -7,6 +7,7 @@ use App\Models\Venta;
 use App\Models\DetalleVenta;
 use App\Http\Requests\VentaFormRequest;
 use DB;
+use PDF;
 use Carbon\Carbon;
 
 class VentasController extends Controller
@@ -116,6 +117,29 @@ class VentasController extends Controller
         ->get();
 
         return view('ventas.venta.show', ["venta"=>$venta, "detalles"=>$detalles]);
+    }
+
+    //reporte
+    public function report($id)
+    {
+        $venta = DB::table('ventas as v')
+        ->join('clientes as cl', 'v.id_cliente', '=', 'cl.id')
+        ->join('detalle_ventas as dv', 'v.id', '=', 'dv.id_venta')
+        ->select('v.id', 'v.fecha', 'cl.nombres', 'cl.apellidos', 'v.impuesto', 'v.status',
+        'v.total')
+        ->where('v.id','=', $id)
+        ->groupBy('v.id','cl.nombres', 'cl.apellidos', 'v.impuesto', 'v.status')
+        ->first();
+
+        $detalles = DB::table('detalle_ventas as d')
+        ->join('productos as p', 'd.id_producto', '=', 'p.id')
+        ->select('p.nombre as producto', 'd.cantidad', 'd.descuento', 'd.precio_venta')
+        ->where('d.id_venta','=',$id)
+        ->get();
+
+        $pdf = PDF::loadView('ventas.venta.pdf', ["venta"=>$venta, "detalles"=>$detalles]);
+
+        return $pdf->stream();
     }
 
     //cancelar

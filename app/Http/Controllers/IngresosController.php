@@ -7,6 +7,7 @@ use App\Models\Ingresos;
 use App\Models\DetalleIngresos;
 use App\Http\Requests\IngresosFormRequest;
 use DB;
+use PDF;
 use Carbon\Carbon;
 
 class IngresosController extends Controller
@@ -115,6 +116,29 @@ class IngresosController extends Controller
         ->get();
 
         return view('compras.ingresos.show', ["ingreso"=>$ingreso, "detalles"=>$detalles]);
+    }
+
+    //pdf
+    public function report($id)
+    {
+        $ingreso = DB::table('ingresos as i')
+        ->join('proveedores as p', 'i.id_proveedor', '=', 'p.id')
+        ->join('detalle_ingresos as di', 'i.id', '=', 'di.id_ingreso')
+        ->select('i.id', 'i.fecha', 'p.nombres', 'p.apellidos', 'i.impuesto', 'i.status',
+        'i.codigo_factura as factura', DB::raw('SUM(di.cantidad*di.precio_compra) as total'))
+        ->where('i.id','=', $id)
+        ->groupBy('i.id','p.nombres', 'p.apellidos', 'i.impuesto', 'i.status')
+        ->first();
+
+        $detalles = DB::table('detalle_ingresos as di')
+        ->join('productos as p', 'di.id_producto', '=', 'p.id')
+        ->select('p.nombre as producto', 'di.cantidad', 'di.precio_compra', 'di.precio_venta')
+        ->where('di.id_ingreso','=',$id)
+        ->get();
+
+        $pdf = PDF::loadView('compras.ingresos.pdf', ["ingreso"=>$ingreso, "detalles"=>$detalles]);
+
+        return $pdf->stream();
     }
 
     //cancelar

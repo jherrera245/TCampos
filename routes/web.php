@@ -61,5 +61,12 @@ Route::post('/pdf-ventas', function(ReporteVentasFormRequest $request){
     return ReporteVentasController::reporteVentas($request);
 });
 
+Route::get('/ingresos/{ingreso}/pdf', function($id){
+    return IngresosController::report($id);
+});
+
+Route::get('/ventas/{venta}/pdf', function($id){
+    return VentasController::report($id);
+});
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');

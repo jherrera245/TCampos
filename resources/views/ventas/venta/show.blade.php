@@ -27,7 +27,7 @@ Detalle ventas
                                 <th>Cantidad</th>
                                 <th>Producto</th>
                                 <th>Precio de Venta</th>
-                                
+                                <th>Descuento</th>
                             </tr>
                         </thead>
 
@@ -37,7 +37,7 @@ Detalle ventas
                                 <td>{{$detalle->cantidad}}</td>
                                 <td>{{$detalle->producto}}</td>
                                 <td>${{$detalle->precio_venta}}</td>
-                            
+                                <td>${{$detalle->descuento}}</td>
                             </tr>
                             @endforeach
                             <tr>
@@ -64,9 +64,9 @@ Detalle ventas
                         <i class="fas fa-angle-left"></i> Regresar
                     </a>
 
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <a href="/ventas/{{$venta->id}}/pdf" class="btn btn-primary float-right" style="margin-right: 5px;">
                         <i class="fas fa-download"></i> Generate PDF
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>

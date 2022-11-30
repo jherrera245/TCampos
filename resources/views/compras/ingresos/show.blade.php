@@ -57,16 +57,14 @@ Detalle Ingresos
 
             <!-- this row will not appear when printing -->
             <div class="row no-print">
-                <div class="col-12">
-                    <a href="#" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
-                    
+                <div class="col-12">                    
                     <a href="/ingresos" class="btn btn-secondary float-right" style="margin-right: 5px;">
                         <i class="fas fa-angle-left"></i> Regresar
                     </a>
 
-                    <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                    <a href="/ingresos/{{$ingreso->id}}/pdf" class="btn btn-primary float-right" style="margin-right: 5px;">
                         <i class="fas fa-download"></i> Generate PDF
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
