@@ -80,7 +80,7 @@ Actualizar Proveedor
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-edit"></i>&nbsp;Guardar
                     </button>
-                    <a href="/productos" class="btn btn-secondary">
+                    <a href="/proveedores" class="btn btn-secondary">
                         <i class="fas fa-angle-left"></i>&nbsp;Cancelar
                     </a>
                 </form>
@@ -105,4 +105,8 @@ Actualizar Proveedor
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{asset('dist/js/formatos.js')}}"></script>
 @endsection

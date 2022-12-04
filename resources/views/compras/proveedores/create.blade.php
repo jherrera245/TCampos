@@ -10,12 +10,12 @@ Nuevo Proveedor
             <div class="card-header">
                 <h3 class="card-title">
                     <i class="fas fa-edit"></i>
-                    Registro de Producto
+                    Registro de proveedor
                 </h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <form action="/clientes" method="post" enctype="multipart/form-data">
+                <form action="/proveedores" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="row">
                         <div class="col-lg-4 col-sm-12">
@@ -79,7 +79,7 @@ Nuevo Proveedor
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-edit"></i>&nbsp;Guardar
                     </button>
-                    <a href="/productos" class="btn btn-secondary">
+                    <a href="/proveedores" class="btn btn-secondary">
                         <i class="fas fa-angle-left"></i>&nbsp;Cancelar
                     </a>
                 </form>
@@ -103,57 +103,8 @@ Nuevo Proveedor
         @endif
     </div>
 </div>
+@endsection
 
-<script>
-    const inputDui = document.querySelector("#dui");
-    const inputTelefono = document.querySelector("#telefono");
-
-    // creacion de mascaras
-    const maskDui = "########-#"
-    const maskTelefono = "####-####"
-
-    let current = ""
-    let duiNumber = []
-    let telefonoNumber = []
-
-    //agregar el evento para cuando se presione la tecla
-
-    inputDui.addEventListener("keydown", (e) => {
-        if (e.key === "Tab") {
-            return
-        }
-
-        e.preventDefault()
-        handleInput(maskDui, e.key, duiNumber)
-        inputDui.value = duiNumber.join("");
-    })
-
-    inputTelefono.addEventListener("keydown", (e) => {
-        if (e.key === "Tab") {
-            return
-        }
-
-        e.preventDefault()
-        handleInput(maskTelefono, e.key, telefonoNumber)
-        inputTelefono.value = telefonoNumber.join("");
-    })
-
-    const handleInput = (mask, key, arr) => {
-        let numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-
-        if (key === "Backspace" && arr.length > 0) {
-            arr.pop()
-            return
-        }
-
-        if (numbers.includes(key) && arr.length + 1 <= mask.length) {
-            if (mask[arr.length] === "-") {
-                arr.push(mask[arr.length], key)
-            }else {
-                arr.push(key)
-            }
-        }
-    }
-</script>
-
+@section('scripts')
+<script src="{{asset('dist/js/formatos.js')}}"></script>
 @endsection

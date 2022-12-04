@@ -58,7 +58,7 @@ function mostrarDatos(){
         let quitar = 0;
 
         listaCompras.forEach(compra=> {
-            if (parseInt(compra.idProducto) === parseInt(compra.id)) {
+            if (parseInt(compra.idProducto) === parseInt(datosProductos[0])) {
                 quitar += compra.cantidad;
             }
         });
@@ -67,6 +67,7 @@ function mostrarDatos(){
 
         $('#stock').val(stock);
         $('#cantidad').attr('max', stock);
+        $('#precio_venta').val(datosProductos[2]);
     }else {
         $('#stock').val(datosProductos[1]);
         $('#cantidad').attr('max', datosProductos[1]);

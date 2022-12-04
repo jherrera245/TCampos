@@ -23,7 +23,7 @@ Nuevo Cliente
                             <div class="form-group mb-3">
                                 <label for="nombre">Nombre</label>
                                 <input type="text" class="form-control" value="{{$clientes->nombres}}" name="nombres" id="nombres" 
-                                placeholder="Nombre del proveedor" maxLength="75" >
+                                placeholder="Nombre del cliente" maxLength="75" >
                             </div>
                         </div>
 
@@ -31,7 +31,7 @@ Nuevo Cliente
                             <div class="form-group mb-3">
                                 <label for="apellido">Apellido</label>
                                 <input type="text" class="form-control" value="{{$clientes->apellidos}}" name="apellidos" id="nombres" 
-                                placeholder="Apellido del proveedor" maxLength="75">
+                                placeholder="Apellido del cliente" maxLength="75">
                             </div>
                         </div>
 
@@ -46,7 +46,7 @@ Nuevo Cliente
                             <div class="form-group mb-3">
                                 <label for="dui">DUI</label>
                                 <input type="text" class="form-control" value="{{$clientes->dui}}" name="dui" id="dui" 
-                                placeholder="DUI del proveedor" pattern="[0-9]{8}-[0-9]{1}" maxLength="10">
+                                placeholder="DUI del cliente" pattern="[0-9]{8}-[0-9]{1}" maxLength="10">
                             </div>
                         </div>
 
@@ -54,7 +54,7 @@ Nuevo Cliente
                             <div class="form-group mb-3">
                                 <label for="telefono">Telefono</label>
                                 <input type="text" class="form-control" value="{{$clientes->telefono}}" name="telefono" id="telefono"
-                                placeholder="Telefono del proveedor" pattern="[0-9]{4}-[0-9]{4}" maxLength="9">
+                                placeholder="Telefono del cliente" pattern="[0-9]{4}-[0-9]{4}" maxLength="9">
                             </div>
                         </div>
 
@@ -62,7 +62,7 @@ Nuevo Cliente
                             <div class="form-group mb-3">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control" value="{{$clientes->email}}" name="email" id="email"
-                                placeholder="Email del proveedor">
+                                placeholder="Email del cliente">
                             </div>
                         </div>
                     </div>
@@ -71,8 +71,8 @@ Nuevo Cliente
                         <div class="col-12">
                             <div class="form-group mb-3">
                                 <label for="direccion">Dirección</label>
-                                <textarea type="text" class="form-control" value="{{$clientes->direccion}}" name="direccion" id="direccion" 
-                                placeholder="Dirección del proveedor" rows="4"></textarea>
+                                <textarea type="text" class="form-control" name="direccion" id="direccion" 
+                                placeholder="Dirección del cliente" rows="4">{{$clientes->direccion}}</textarea>
                             </div>
                         </div>
                     </div>
@@ -80,7 +80,7 @@ Nuevo Cliente
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-edit"></i>&nbsp;Guardar
                     </button>
-                    <a href="/productos" class="btn btn-secondary">
+                    <a href="/clientes" class="btn btn-secondary">
                         <i class="fas fa-angle-left"></i>&nbsp;Cancelar
                     </a>
                 </form>
@@ -105,4 +105,8 @@ Nuevo Cliente
     </div>
 </div>
 
+@endsection
+
+@section('scripts')
+<script src="{{asset('dist/js/formatos.js')}}"></script>
 @endsection

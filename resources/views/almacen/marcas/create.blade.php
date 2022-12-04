@@ -40,7 +40,7 @@ Nueva Marca
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-edit"></i>&nbsp;Guardar
                     </button>
-                    <a href="/categorias" class="btn btn-secondary">
+                    <a href="/marcas" class="btn btn-secondary">
                         <i class="fas fa-angle-left"></i>&nbsp;Cancelar
                     </a>
                 </form>
