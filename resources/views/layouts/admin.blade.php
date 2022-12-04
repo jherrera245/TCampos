@@ -42,12 +42,8 @@
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <span class="dropdown-header">Herramientas</span>
                         <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
+                        <a href="/profile/{{Auth::user()->id}}/edit" class="dropdown-item">
                             <i class="fas fa-user mr-2"></i> Perfil
-                        </a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item">
-                            <i class="fas fa-lock mr-2"></i> Cambiar Contraseña
                         </a>
                         <div class="dropdown-divider"></div>
 
@@ -226,7 +222,7 @@
                             </a>
                             <ul class="nav nav-treeview" style="display: none;">
                                 <li class="nav-item">
-                                    <a href="../../index.html" class="nav-link">
+                                    <a href="/usuarios" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Usuarios</p>
                                     </a>

@@ -11,6 +11,9 @@ use App\Http\Controllers\VentasController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ReporteComprasController;
 use App\Http\Controllers\ReporteVentasController;
+use App\Http\Controllers\UsuariosController;
+use App\Http\Requests\ProfileUserFormRequest;
+use App\Http\Requests\PasswordUpdateFormRequest;
 use App\Http\Requests\ReporteComprasFormRequest;
 use App\Http\Requests\ReporteVentasFormRequest;
 
@@ -39,6 +42,7 @@ Route::resource('/clientes', ClientesController::class);
 Route::resource('/ventas', VentasController::class);
 Route::resource('/reportes-compras', ReporteComprasController::class);
 Route::resource('/reportes-ventas', ReporteVentasController::class);
+Route::resource('/usuarios', UsuariosController::class);
 Auth::routes();
 
 //rutas para graficas
@@ -67,6 +71,25 @@ Route::get('/ingresos/{ingreso}/pdf', function($id){
 
 Route::get('/ventas/{venta}/pdf', function($id){
     return VentasController::report($id);
+});
+
+// rutas personalizadas
+Route::group(['middleware' => 'auth'], function(){
+    //rutas para modifcar perfil
+    Route::get('/profile/{usuario}/edit', function($id){
+        return UsuariosController::profile($id);
+    });
+
+    //ruta de actualizacion email y nombre de usuario
+    Route::put('/profile/{usuario}', function(ProfileUserFormRequest $request, $id){
+        return UsuariosController::profileUserUpdate($request, $id);
+    });
+
+    //ruta de actualizacion de password
+    Route::put('/password-update/{usuario}', function(PasswordUpdateFormRequest $request, $id){
+        return UsuariosController::profilePasswordUpdate($request, $id);
+    });
+
 });
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
