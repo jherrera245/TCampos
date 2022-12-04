@@ -40,6 +40,7 @@ class ProductosController extends Controller
                 ->orwhere('m.nombre','LIKE', '%'.$query.'%');
             })
             ->where('p.status','=', '1')
+            ->groupBy('p.id')
             ->orderBy('p.id','desc')
             ->paginate(6);
 
