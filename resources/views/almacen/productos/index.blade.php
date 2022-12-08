@@ -9,10 +9,16 @@ Productos
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Lista de Productos</h3>
+                <h3 class="card-title">
+                    Lista de Productos
+                    <a class="btn btn-primary btn-sm" target="_blank" href="/productos/report/pdf">
+                        <i class="fa fa-download"></i>
+                        PDF
+                    </a>
+                </h3>
 
                 <div class="card-tools">
-                    @include('almacen.productos.search') 
+                    @include('almacen.productos.search')
                 </div>
             </div>
             <!-- /.card-header -->

@@ -8,6 +8,7 @@ use App\Http\Requests\ProductosFormRequest;
 use Illuminate\Support\Facades\Storage;
 use File;
 use DB;
+use PDF;
 
 class ProductosController extends Controller
 {
@@ -46,6 +47,26 @@ class ProductosController extends Controller
 
             return view('almacen.productos.index', ["productos" =>$productos, "search" => $query]);
         }
+    }
+
+    //report
+    public function report()
+    {
+        $productos = DB::table('productos as p')
+        ->join('categorias as c', 'p.id_categoria', '=', 'p.id_categoria')
+        ->join('marcas as m', 'p.id_marca', '=', 'm.id')
+        ->select(
+            'p.id', 'p.nombre as producto', 'c.nombre as categoria', 
+            'm.nombre as marca', 'p.codigo', 'p.stock', 'p.imagen',
+        )
+        ->where('p.status','=', '1')
+        ->groupBy('p.id')
+        ->orderBy('p.id','desc')
+        ->get();
+
+        $pdf = PDF::loadView('almacen.productos.pdf', ["productos" =>$productos]);
+
+        return $pdf->stream();
     }
 
     //vista crear

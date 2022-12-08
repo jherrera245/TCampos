@@ -135,7 +135,7 @@ Nueva Venta
                     <button type="submit" class="btn btn-primary" id="btn-guardar" disabled>
                         <i class="fas fa-edit"></i>&nbsp;Guardar
                     </button>
-                    <a href="/ingresos" class="btn btn-secondary">
+                    <a href="/ventas" class="btn btn-secondary">
                         <i class="fas fa-angle-left"></i>&nbsp;Cancelar
                     </a>
                 </form>

@@ -73,6 +73,10 @@ Route::get('/ventas/{venta}/pdf', function($id){
     return VentasController::report($id);
 });
 
+Route::get('/productos/report/pdf', function(){
+    return ProductosController::report();
+});
+
 // rutas personalizadas
 Route::group(['middleware' => 'auth'], function(){
     //rutas para modifcar perfil
