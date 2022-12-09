@@ -31,6 +31,15 @@ Nuevo Ingreso
 
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group mb-3">
+                                <label for="proveedor-modal">Agregar Proveedor</label>
+                                <button type="button" class="btn btn-info w-100" data-toggle="modal" data-target="#modal-proveedor">
+                                    Si el proveedor no existe hacer clic aquí
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group mb-3">
                                 <label for="codigo_factura">Código Factura</label>
                                 <input type="text" class="form-control" name="factura" id="factura" 
                                 placeholder="Ingresa el código de la factura" maxLength="75" required>
@@ -142,6 +151,8 @@ Nuevo Ingreso
     </div>
 </div>
 
+@include('compras.ingresos.modal-create-proveedor')
+
 <!-- template detalle productos -->
 <template id="template-detalle-compra">
     <tr>
@@ -203,4 +214,5 @@ Nuevo Ingreso
 
 @section('scripts')
 <script src="{{asset('dist/js/compras.js')}}"></script>
+<script src="{{asset('dist/js/formatos.js')}}"></script>
 @endsection

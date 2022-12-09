@@ -16,6 +16,8 @@ use App\Http\Requests\ProfileUserFormRequest;
 use App\Http\Requests\PasswordUpdateFormRequest;
 use App\Http\Requests\ReporteComprasFormRequest;
 use App\Http\Requests\ReporteVentasFormRequest;
+use App\Http\Requests\ProveedoresCreateFormRequest;
+use App\Http\Requests\ClientesFormRequest;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,16 +67,44 @@ Route::post('/pdf-ventas', function(ReporteVentasFormRequest $request){
     return ReporteVentasController::reporteVentas($request);
 });
 
+//reporte de detalles de compra
 Route::get('/ingresos/{ingreso}/pdf', function($id){
     return IngresosController::report($id);
 });
 
+//reporte general de compra
+Route::get('/ingresos/report/general', function(){
+    return IngresosController::reporteGeneral();
+});
+
+//reporte de detalles de venta
 Route::get('/ventas/{venta}/pdf', function($id){
     return VentasController::report($id);
 });
 
-Route::get('/productos/report/pdf', function(){
-    return ProductosController::report();
+//reporte general de ventas
+Route::get('/ventas/report/general', function(){
+    return VentasController::reporteGeneral();
+});
+
+//reporte de clientes
+Route::get('/clientes/report/pdf', function(){
+    return ClientesController::report();
+});
+
+//reporte de proveedores
+Route::get('/proveedores/report/pdf', function(){
+    return ProveedoresController::report();
+});
+
+//agregar proveedor desde ingresos
+Route::post('/ingresos/create/proveedor', function(ProveedoresCreateFormRequest $request){
+    return IngresosController::agregarProveedor($request);
+});
+
+//agregar cliente desde ventas
+Route::post('/ventas/create/cliente', function(ClientesFormRequest $request){
+    return VentasController::agregarCliente($request);
 });
 
 // rutas personalizadas

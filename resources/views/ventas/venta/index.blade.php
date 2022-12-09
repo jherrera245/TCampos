@@ -10,7 +10,13 @@ Ventas
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Listado de ventas</h3>
+                <h3 class="card-title">
+                    Listado de ventas
+                    <a class="btn btn-primary btn-sm" target="_blank" href="/ventas/report/general">
+                        <i class="fa fa-download"></i>
+                        PDF
+                    </a>
+                </h3>
 
                 <div class="card-tools">
                     @include('ventas.venta.search') 
@@ -21,7 +27,7 @@ Ventas
                 <table class="table table-hover text-nowrap">
                     <thead>
                         <tr>
-                            <th>Fecha</th>
+                            <th>ID</th>
                             <th>Cliente</th>
                             <th>Total</th>
                             <th>Impuesto</th>

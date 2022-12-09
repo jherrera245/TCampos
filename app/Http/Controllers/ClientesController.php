@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Clientes;
 use App\Http\Requests\ClientesFormRequest;
 use DB;
+use PDF;
 
 class ClientesController extends Controller
 {
@@ -38,10 +39,21 @@ class ClientesController extends Controller
 
     }
 
+    //generar pdf de clientes
+    public function report()
+    {
+        $clientes=DB::table('clientes')
+        ->where('status','=','1')
+        ->orderBy('id','desc')
+        ->get();
+
+        $pdf = PDF::loadView('ventas.clientes.pdf', ["clientes" =>$clientes]);
+        return $pdf->stream();        
+    }
+
     public function create()
     {
         return view("ventas.clientes.create");
-
     }
 
     public function store(ClientesFormRequest $request)

@@ -9,7 +9,13 @@ Proveedores
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Lista de Proveedores</h3>
+                <h3 class="card-title">
+                    Lista de Proveedores
+                    <a class="btn btn-primary btn-sm" target="_blank" href="/proveedores/report/pdf">
+                        <i class="fa fa-download"></i>
+                        PDF
+                    </a>
+                </h3>
 
                 <div class="card-tools">
                     @include('compras.proveedores.search') 

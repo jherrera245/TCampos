@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Venta;
+use App\Models\Clientes;
 use App\Models\DetalleVenta;
 use App\Http\Requests\VentaFormRequest;
+use App\Http\Requests\ClientesFormRequest;
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -142,6 +144,22 @@ class VentasController extends Controller
         return $pdf->stream();
     }
 
+    //reporte general de las compras
+    public function reporteGeneral()
+    {
+        $ventas = DB::table('ventas as v')
+        ->join('clientes as cl', 'v.id_cliente', '=', 'cl.id')
+        ->join('detalle_ventas as dv', 'v.id', '=', 'dv.id_venta')
+        ->select('v.id', 'cl.nombres', 'cl.apellidos', 'v.impuesto', 'v.status', 'v.fecha',
+        'v.total')
+        ->orderBy('v.id', 'DESC')
+        ->groupBy('v.id', 'cl.nombres', 'cl.apellidos', 'v.impuesto', 'v.status')
+        ->paginate(7);
+
+        $pdf = PDF::loadView('ventas.venta.pdf-general', ["ventas"=>$ventas]);
+        return $pdf->stream();
+    }
+
     //cancelar
     public function destroy($id)
     {
@@ -151,5 +169,19 @@ class VentasController extends Controller
         return redirect('/ventas');
     }
 
-    //
+    //agregar nuevo cliente desde ingreso
+    public function agregarCliente(ClientesFormRequest $request)
+    {
+        $clientes=new Clientes;
+        $clientes->nombres=$request->get('nombres');
+        $clientes->apellidos=$request->get('apellidos');
+        $clientes->fecha_nacimiento=$request->get('nacimiento');
+        $clientes->dui=$request->get('dui');
+        $clientes->direccion=$request->get('direccion');
+        $clientes->telefono=$request->get('telefono');
+        $clientes->email=$request->get('email');
+        $clientes->status='1';
+        $clientes->save();
+        return redirect('/ventas/create');
+    }
 }

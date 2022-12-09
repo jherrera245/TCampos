@@ -7,6 +7,7 @@ use App\Models\Proveedores;
 use App\Http\Requests\ProveedoresCreateFormRequest;
 use App\Http\Requests\ProveedoresUpdateFormRequest;
 use DB;
+use PDF;
 
 
 class ProveedoresController extends Controller
@@ -40,6 +41,18 @@ class ProveedoresController extends Controller
  
             return view('compras.proveedores.index', ["proveedores" =>$proveedores, "search" => $query]);
         }
+    }
+
+    //generar pdf de proveedores
+    public function report()
+    {
+        $proveedores=DB::table('proveedores')
+        ->where('status','=','1')
+        ->orderBy('id','desc')
+        ->get();
+
+        $pdf = PDF::loadView('compras.proveedores.pdf', ["proveedores" =>$proveedores]);
+        return $pdf->stream();        
     }
  
     //vista crear

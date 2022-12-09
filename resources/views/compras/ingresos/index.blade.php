@@ -9,7 +9,13 @@ Ingresos
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Lista de Ingresos</h3>
+                <h3 class="card-title">
+                    Lista de Ingresos
+                    <a class="btn btn-primary btn-sm" target="_blank" href="/ingresos/report/general">
+                        <i class="fa fa-download"></i>
+                        PDF
+                    </a>
+                </h3>
 
                 <div class="card-tools">
                     @include('compras.ingresos.search') 

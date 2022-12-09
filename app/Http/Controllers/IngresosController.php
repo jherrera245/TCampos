@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Ingresos;
+use App\Models\Proveedores;
 use App\Models\DetalleIngresos;
 use App\Http\Requests\IngresosFormRequest;
+use App\Http\Requests\ProveedoresCreateFormRequest;
 use DB;
 use PDF;
 use Carbon\Carbon;
@@ -141,6 +143,24 @@ class IngresosController extends Controller
         return $pdf->stream();
     }
 
+    //reporte general de las compras
+    public function reporteGeneral()
+    {
+        $ingresos = DB::table('ingresos as i')
+        ->join('proveedores as p', 'i.id_proveedor', '=', 'p.id')
+        ->join('detalle_ingresos as di', 'i.id', '=', 'di.id_ingreso')
+        ->select('i.id', 'p.nombres', 'p.apellidos', 'i.impuesto', 'i.status', 'i.fecha',
+        'i.codigo_factura as factura', DB::raw('SUM(di.cantidad*di.precio_compra) as total'))
+        ->orderBy('i.id', 'DESC')
+        ->groupBy('i.id', 'p.nombres', 'p.apellidos', 'i.impuesto', 'i.status')
+        ->get();
+
+        $pdf = PDF::loadView('compras.ingresos.pdf-general', ["ingresos"=>$ingresos]);
+
+        return $pdf->stream();
+    }
+
+
     //cancelar
     public function destroy($id)
     {
@@ -148,5 +168,20 @@ class IngresosController extends Controller
         $ingreso->status = false;
         $ingreso->update();
         return redirect('/ingresos');
+    }
+
+    //registrar un proveedor
+    public function agregarProveedor(ProveedoresCreateFormRequest $request)
+    {
+        $proveedor = new Proveedores();
+        $proveedor->nombres = $request->get('nombres');
+        $proveedor->apellidos = $request->get('apellidos');
+        $proveedor->fecha_nacimiento = $request->get('nacimiento');
+        $proveedor->dui = $request->get('dui');
+        $proveedor->direccion = $request->get('direccion');
+        $proveedor->telefono = $request->get('telefono');
+        $proveedor->email = $request->get('email');
+        $proveedor->save();
+        return redirect('/ingresos/create');
     }
 }

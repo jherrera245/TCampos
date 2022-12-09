@@ -29,6 +29,15 @@ Nueva Venta
                             </div>
                         </div>
 
+                        <div class="col-lg-4 col-sm-12">
+                            <div class="form-group mb-3">
+                                <label for="cliente-modal">Agregar Cliente</label>
+                                <button type="button" class="btn btn-info w-100" data-toggle="modal" data-target="#modal-cliente">
+                                    Si el cliente no existe hacer clic aquí
+                                </button>
+                            </div>
+                        </div>
+
                     </div>
 
                     <!-- Card regitro de ingresos -->
@@ -146,6 +155,8 @@ Nueva Venta
     </div>
 </div>
 
+@include('ventas.venta.modal-create-cliente')
+
 <!-- template detalle productos -->
 <template id="template-detalle-compra">
     <tr>
@@ -209,4 +220,5 @@ Nueva Venta
 
 @section('scripts')
 <script src="{{asset('dist/js/ventas.js')}}"></script>
+<script src="{{asset('dist/js/formatos.js')}}"></script>
 @endsection
