@@ -40,7 +40,6 @@ Ventas
                         @foreach ($ventas as $venta)
                         <tr>
                             <td>{{$venta->id}}</td>
-                           
                             <td>{{$venta->nombres}}</td>
                             <td>{{$venta->apellidos}}</td>
                             <td>{{$venta->impuesto}} %</td>
