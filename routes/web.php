@@ -92,6 +92,11 @@ Route::get('/clientes/report/pdf', function(){
     return ClientesController::report();
 });
 
+//reporte general de productos
+Route::get('/productos/report/pdf', function(){
+    return ProductosController::report();
+});
+
 //reporte de proveedores
 Route::get('/proveedores/report/pdf', function(){
     return ProveedoresController::report();
