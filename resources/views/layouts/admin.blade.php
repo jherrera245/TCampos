@@ -229,6 +229,13 @@
                                 </li>
                             </ul>
                         </li>
+
+                        <li class="nav-item">
+                            <a href="https://youtu.be/KP-yfkas0Fc" target="_blank" class="nav-link">
+                                <i class="nav-icon fas fa-info"></i>
+                                <p>Ayuda</p>
+                            </a>
+                        </li>
                         
                     </ul>
                 </nav>
