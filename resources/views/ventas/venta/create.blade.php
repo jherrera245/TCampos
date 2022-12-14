@@ -27,7 +27,10 @@ Nueva Venta
                                 @endforeach
                                 </select>
                             </div>
+                           
                         </div>
+                        
+                        
 
                         <div class="col-lg-4 col-sm-12">
                             <div class="form-group mb-3">
@@ -39,6 +42,7 @@ Nueva Venta
                         </div>
 
                     </div>
+                    
 
                     <!-- Card regitro de ingresos -->
                     <div class="row">
@@ -65,6 +69,8 @@ Nueva Venta
                                                 @endforeach
                                                 </select>
                                             </div>
+                                            
+
                                         </div>
                                         
 
